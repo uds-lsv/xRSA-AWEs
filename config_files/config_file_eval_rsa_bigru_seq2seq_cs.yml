@@ -1,0 +1,68 @@
+# CONFIG FILE FOR AN EXPERIMENT
+
+data_dir: '/data/GP_FBANK_ALL_39/'
+speech_metadata: '/RSA_word_phonology/metadata/gp_words_metadata_train_valid_32k_x.tsv'
+model_save_dir: '/RSA_word_phonology/inprogress_models/'
+seed: 1248 #1358
+stimuli_language: 'DEU' # CZE DEU
+model_languages: 'POR CZE POL RUS BUL FRA DEU' # POR CZE POL RUS BUL FRA DEU
+eval_split: 'DEV' #DEV' #EVA
+
+
+pretrained_models:
+    POR: '16072021_17_46_46_AWEs_2BiGRU_seq2seq_1024D_POR_FBANK_100.pth'
+    CZE: '13072021_13_26_35_AWEs_2BiGRU_seq2seq_1024D_CZE_FBANK_94.pth'
+    POL: '16072021_14_30_54_AWEs_2BiGRU_seq2seq_1024D_POL_FBANK_96.pth'
+    RUS: '15072021_17_14_49_AWEs_2BiGRU_seq2seq_1024D_RUS_FBANK_97.pth'
+    BUL: '15072021_17_17_19_AWEs_2BiGRU_seq2seq_1024D_BUL_FBANK_91.pth'
+    #HRV: '03062021_18_07_16_AWEs_2BiGRU_seq2seq_HRV_FBANK_94.pth'
+    FRA: '15072021_17_05_11_AWEs_2BiGRU_seq2seq_1024D_FRA_FBANK_85.pth'
+    DEU: '16072021_14_29_15_AWEs_2BiGRU_seq2seq_1024D_DEU_FBANK_100.pth'
+
+    # CZE: '03062021_17_55_56_AWEs_2BiGRU_seq2seq_CZE_FBANK_92.pth'
+    # POL: '03062021_17_57_26_AWEs_2BiGRU_seq2seq_POL_FBANK_97.pth'
+    # RUS: '03062021_17_57_57_AWEs_2BiGRU_seq2seq_RUS_FBANK_93.pth'
+    # BUL: '03062021_18_11_46_AWEs_2BiGRU_seq2seq_BUL_FBANK_92.pth'
+    # HRV: '03062021_18_07_16_AWEs_2BiGRU_seq2seq_HRV_FBANK_94.pth'
+    # FRA: '03062021_18_16_55_AWEs_2BiGRU_seq2seq_FRA_FBANK_97.pth'
+    # DEU: '03062021_18_13_01_AWEs_2BiGRU_seq2seq_DEU_FBANK_87.pth'
+
+
+#
+input_signal_params:
+    acoustic_features: 'FBANK'
+    max_num_frames: 120
+    sampling_rate: 16000
+
+#
+acoustic_encoder:
+    encoder_arch: 'BiGRU'
+    spectral_dim: 39
+    max_num_frames: 120
+    hidden_state_dim: 512
+    output_dim: 1024
+    n_layers: 2
+    unit_dropout_prob: 0.2
+    frame_dropout: False # either frame_dropout or feature_dropout can be True
+    feature_dropout: False
+    signal_dropout_prob: 0.0
+#
+phonetic_decoder:
+    embedding_dim: 128
+    hidden_state_dim: 1024
+    n_layers: 1
+    vocab_size:
+        POR: 41
+        CZE: 37
+        POL: 35
+        RUS: 38
+        BUL: 34
+        HRV: 38
+        FRA: 40
+        DEU: 43
+#
+batch_size: 256
+cuda: True
+catch_keyboard_interrupt: True
+reload_from_files: False
+expand_filepaths_to_save_dir: True

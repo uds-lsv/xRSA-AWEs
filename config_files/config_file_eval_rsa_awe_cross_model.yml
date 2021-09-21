@@ -1,0 +1,121 @@
+# CONFIG FILE FOR AN EXPERIMENT
+#
+data_dir: '/data/GP_FBANK_ALL_39/'
+speech_metadata: '/RSA_word_phonology/metadata/gp_words_metadata_train_valid_32k_x.tsv'
+model_save_dir: '/RSA_word_phonology/inprogress_models/'
+seed: 1248 #1358
+model_language: 'DEU'
+stimuli_language: 'DEU' # CZE DEU
+model_types: 'PED-RNN CAE-RNN CTR-RNN' #
+eval_split: 'DEV' #DEV' #EVA
+
+pretrained_models:
+
+  # CAE-RNN: '15072021_00_34_46_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_CZE_FBANK_97.pth'
+  # CTR-RNN: '18072021_13_34_01_AWEs_2BiGRU_1024d_siamese_CZE_FBANK_95.pth'
+  # PED-RNN: '13072021_13_26_35_AWEs_2BiGRU_seq2seq_1024D_CZE_FBANK_94.pth'
+
+
+#   PED-CNN: '19072021_18_14_54_AWEs_CNN_seq2seq_1024D_CZE_FBANK_96.pth'
+#   CTR-CNN: '19072021_19_14_26_AWEs_CNN_siamese_1024D_CZE_FBANK_63.pth'
+#   CAE-CNN: '20072021_11_09_37_AWEs_CNN_1024d_pretrained_CAE_TF03_CZE_FBANK_148.pth'
+
+  # CAE-RNN: '16072021_15_18_46_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_BUL_FBANK_150.pth'
+  # CTR-RNN: '15072021_16_35_54_AWEs_2BiGRU_1024d_siamese_BUL_FBANK_98.pth'
+  # PED-RNN: '15072021_17_17_19_AWEs_2BiGRU_seq2seq_1024D_BUL_FBANK_91.pth'
+
+  # PED-RNN: '15072021_17_14_49_AWEs_2BiGRU_seq2seq_1024D_RUS_FBANK_97.pth'
+  # CTR-RNN: '15072021_16_37_10_AWEs_2BiGRU_1024d_siamese_RUS_FBANK_51.pth'
+  # CAE-RNN: '17072021_17_14_29_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_RUS_FBANK_143.pth'
+
+  # PED-RNN: '15072021_17_05_11_AWEs_2BiGRU_seq2seq_1024D_FRA_FBANK_85.pth'
+  # CTR-RNN: '15072021_16_33_39_AWEs_2BiGRU_1024d_siamese_FRA_FBANK_56.pth'
+  # CAE-RNN: '16072021_14_47_46_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_FRA_FBANK_150.pth'
+
+  CTR-RNN: '15072021_16_32_54_AWEs_2BiGRU_1024d_siamese_DEU_FBANK_92.pth'
+  PED-RNN: '16072021_14_29_15_AWEs_2BiGRU_seq2seq_1024D_DEU_FBANK_100.pth'
+  CAE-RNN: '16072021_14_44_00_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_DEU_FBANK_150.pth'
+
+  # PED-RNN: '16072021_17_46_46_AWEs_2BiGRU_seq2seq_1024D_POR_FBANK_100.pth'
+  # CTR-RNN: '16072021_17_55_31_AWEs_2BiGRU_1024d_siamese_POR_FBANK_85.pth'
+  # CAE-RNN: '17072021_16_59_59_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_POR_FBANK_145.pth'
+
+  # PED-RNN: '16072021_14_30_54_AWEs_2BiGRU_seq2seq_1024D_POL_FBANK_96.pth'
+  # CTR-RNN: '15072021_16_29_39_AWEs_2BiGRU_1024d_siamese_POL_FBANK_59.pth'
+  # CAE-RNN: '16072021_14_41_15_AWEs_2BiGRU_1024d_pretrained_CAE_TF03_POL_FBANK_140.pth'
+
+
+
+#
+input_signal_params:
+    acoustic_features: 'FBANK'
+    max_num_frames: 120
+    sampling_rate: 16000
+
+#
+CNN_acoustic_encoder:
+    encoder_arch: 'CNN'
+    spectral_dim: 39
+    max_num_frames: 120
+    output_dim: 1024
+    pooling_type: 'avg'
+    frame_dropout: False # either frame_dropout or feature_dropout can be True
+    feature_dropout: False
+    signal_dropout_prob: 0.0
+    unit_dropout_prob: 0.2
+    num_channels:
+       - 256
+       - 512
+       - 1024
+    filter_sizes:
+       - 4
+       - 8
+       - 16
+    stride_steps:
+       - 1
+       - 1
+       - 1
+#
+RNN_acoustic_encoder:
+    encoder_arch: 'BiGRU'
+    spectral_dim: 39
+    max_num_frames: 120
+    hidden_state_dim: 512
+    output_dim: 1024
+    n_layers: 2
+    unit_dropout_prob: 0.2
+    frame_dropout: False # either frame_dropout or feature_dropout can be True
+    feature_dropout: False
+    signal_dropout_prob: 0.0
+
+phonetic_decoder:
+    embedding_dim: 128
+    hidden_state_dim: 1024
+    n_layers: 1
+    vocab_size:
+        POR: 41
+        CZE: 37
+        POL: 35
+        RUS: 38
+        BUL: 34
+        HRV: 38
+        FRA: 40
+        DEU: 43
+
+
+acoustic_decoder:
+    encoder_arch: 'BiGRU'
+    spectral_dim: 39
+    max_num_frames: 120
+    hidden_state_dim: 1024
+    n_layers: 1
+    unit_dropout_prob: 0.2
+    frame_dropout: False # either frame_dropout or feature_dropout can be True
+    feature_dropout: False
+    signal_dropout_prob: 0.0
+
+batch_size: 256
+cuda: True
+catch_keyboard_interrupt: True
+reload_from_files: False
+expand_filepaths_to_save_dir: True
