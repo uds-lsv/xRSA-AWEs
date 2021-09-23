@@ -35,18 +35,18 @@ To run a training experiment, write down all hyperparameters and other info in t
 Then ...
 
 ```
->>> cd AWEs_phon_sim
+>>> cd xRSA-AWEs
 >>> python nn_train_seq2seq_embeddings.py config_files/config_file_train_awe_bigru_seq2seq.yml
 ```
 
-To evaluate the model on the acoustic word discrimination task, make sure the path to the pre-trained model is in this config file ```config_file_eval_awe_bigru_seq2seq.yml```
+To conduct the RSA using CKA on a pre-trained AWE model, make sure the paths for the different pre-trained models are in this config file ```config_file_eval_rsa_bigru_seq2seq_cs.yml```
 
 Then ...
 
 
 ```
->>> cd AWEs_phon_sim
->>> python nn_eval/nn_eval_seq2seq_embeddings.py config_files/config_file_eval_awe_bigru_seq2seq.yml
+>>> cd xRSA-AWEs
+>>> python nn_eval/nn_eval_seq2seq_embeddings_RSA.py config_file_eval_rsa_bigru_seq2seq_cs.yml
 ```
 
 The code is fairly documented and the vectorization logic, as well as the code for the models, should be useful for other speech technology tasks. If you use our code and encounter problems, please create an issue or contact the first author.
