@@ -1,6 +1,9 @@
 
-# How Familiar Does That Sound?  :speech_balloon: :ear:
-### Cross-Lingual Representational Similarity Analysis of Acoustic Word Embeddings :coffee:
+# How Familiar Does That Sound?   :ear: :speech_balloon:
+### Cross-Lingual Representational Similarity Analysis of Acoustic Word Embeddings
+
+# :coffee:
+
 
 This is the code base to train different models acoustic word embeddings (AWEs), evaluation scripts, and the representational similarity analysis (RSA) experiments reported in our **BlackboxNLP** paper in **EMNLP 2021**.
 
@@ -49,7 +52,7 @@ Then ...
 The code is fairly documented and the vectorization logic, as well as the code for the models, should be useful for other speech technology tasks. If you use our code and encounter problems, please create an issue or contact the first author.
 
 
-If you use our code in a work that leads to a publication, please cite our paper as
+If you use our code in your work or get inspired by the ideas presented in our paper, please cite our paper as
 
 ```
 @inproceedings{Abdullah2021HowFD,
